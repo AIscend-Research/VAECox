@@ -172,10 +172,17 @@ python phase3_additional.py
 
 **Paper:** VAECox outperforms baselines on **7/10** TCGA cancer types by C-index.
 
-**Our reproduction (toy data):** VAECox achieves highest mean C-index (0.572)
-and wins on **4/10** cancer types (HNSC, KIRC, LIHC, STAD). Directional
-consistency with the paper's finding — VAECox advantage most visible where
-training data has sufficient events (≥8 per cancer).
+**Our reproduction (toy data):** VAECox wins on **4/10** cancer types
+(BLCA, HNSC, KIRC, LIHC) and has the second-highest mean C-index (0.572);
+CoxMLP is highest at 0.587. The paper's claim is therefore **not reproduced**
+on toy data.
+
+This is the expected outcome, not a refutation of the paper: with 30 patients
+per cancer and as few as 3 uncensored events (BRCA, LUAD), the C-index is
+dominated by split noise — BRCA yields a degenerate 1.00 for CoxMLP against
+0.00 for VAECox on the same split, which alone moves the mean by 0.10. Toy-data
+numbers verify that the pipeline runs; they cannot test the paper's claim.
+See the real-TCGA run in `VAECox_reproduction.ipynb` for the actual test.
 
 ---
 

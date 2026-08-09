@@ -550,14 +550,7 @@ python phase3_additional.py
 
 ---
 
-## 9. Key Finding
-
-**Paper:** VAECox outperforms baselines on **7/10** TCGA cancer types by C-index.
-
-**Our reproduction (toy data):** VAECox achieves highest mean C-index (0.572)
-and wins on **4/10** cancer types (HNSC, KIRC, LIHC, STAD). Directional
-consistency with the paper's finding — VAECox advantage most visible where
-training data has sufficient events (≥8 per cancer).
+{key_finding}
 
 ---
 
@@ -565,13 +558,58 @@ training data has sufficient events (≥8 per cancer).
 `results/phase3/reproducibility_card.txt` for training times and numeric details.*
 """
 
+def build_key_finding(path='results/phase2/cindex_comparison.csv',
+                      baselines=('CoxLasso', 'CoxRidge', 'Coxnnet', 'CoxMLP', 'VAECox')):
+    """Section 9, computed from the results table rather than typed.
+
+    Hand-written summaries drift the moment a run changes; an earlier version of
+    this file claimed VAECox had the highest mean C-index when CoxMLP did, and
+    listed the wrong four cancers.
+    """
+    if not os.path.exists(path):
+        return ('## 9. Key Finding\n\n_No `%s` yet — run `phase2_reproduction.py` '
+                'first._' % path)
+    df = pd.read_csv(path, index_col=0)
+    df = df.loc[[m for m in baselines if m in df.index]]      # paper's model set only
+    cancers = [c for c in df.columns if c != 'Mean']
+    winners = {c: df[c].idxmax() for c in cancers}
+    vae_wins = sorted(c for c, m in winners.items() if m == 'VAECox')
+    means = df['Mean'].sort_values(ascending=False)
+    best, best_val = means.index[0], means.iloc[0]
+    vae_mean = float(df.loc['VAECox', 'Mean'])
+    vae_rank = list(means.index).index('VAECox') + 1
+
+    if best == 'VAECox':
+        mean_txt = f'the highest mean C-index ({vae_mean:.3f})'
+    else:
+        mean_txt = (f'the #{vae_rank} mean C-index ({vae_mean:.3f}); '
+                    f'{best} is highest at {best_val:.3f}')
+    verdict = ('**reproduced**' if len(vae_wins) >= 0.7 * len(cancers)
+               else '**partially reproduced**' if len(vae_wins) >= 0.4 * len(cancers)
+               else '**not reproduced**')
+
+    return f"""## 9. Key Finding
+
+**Paper:** VAECox outperforms baselines on **7/10** TCGA cancer types by C-index.
+
+**Our reproduction (toy data):** VAECox wins on **{len(vae_wins)}/{len(cancers)}**
+cancer types ({', '.join(vae_wins) if vae_wins else 'none'}) and has
+{mean_txt}. The paper's claim is therefore {verdict} on toy data.
+
+This is the expected outcome, not a refutation of the paper: with 30 patients
+per cancer and as few as 3 uncensored events, the C-index is dominated by split
+noise, and cohorts that degenerate to 0.00/1.00 move the mean on their own.
+Toy-data numbers verify that the pipeline runs; they cannot test the paper's
+claim. See the real-TCGA run in `VAECox_reproduction.ipynb` for the actual test."""
+
+
 def write_reproducibility_checklist():
     print('\n' + '='*70)
     print('PHASE 3 ADDITIONAL — C. REPRODUCIBILITY CHECKLIST')
     print('='*70)
     path = 'REPRODUCIBILITY.md'
     with open(path, 'w') as f:
-        f.write(CHECKLIST_MD)
+        f.write(CHECKLIST_MD.replace('{key_finding}', build_key_finding()))
     print(f'Saved: {path}')
     print('  Sections: data source, environment, preprocessing, model settings,')
     print('            random seeds, exact commands, expected outputs, deviations')

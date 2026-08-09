@@ -6,7 +6,7 @@ MLRC Reproducibility Study
 PAPER REFERENCE
   Title  : Improved survival analysis by learning shared genomic information
              from pan-cancer data
-  Authors: Huang et al.
+  Authors: Kim S., Kim K., Choe J., Lee I., Kang J.
   Venue  : Bioinformatics, Volume 36, Supplement 1, July 2020, pp. i389–i397
   DOI    : 10.1093/bioinformatics/btaa462
   Code   : https://github.com/dmis-lab/VAECox
@@ -156,15 +156,19 @@ Our C-index (mean across valid seeds, 80/20 split, 50 epochs):
   VAECox     0.613  0.000  0.831  0.729  0.764  0.680  0.458  0.380  0.526  0.736  0.572
   CoxPH-PCA  0.293  0.000  0.299  0.298  0.236  0.382  0.681  0.720  0.322  0.274  0.350
 
-  VAECox wins: 4/10 cancers (HNSC, KIRC, LIHC, STAD)
+  VAECox wins: 4/10 cancers (BLCA, HNSC, KIRC, LIHC)
   Note: BRCA/LUAD/LUSC results are unreliable (<=3 test events per seed)
 
 Paper reported (full TCGA, 500-epoch VAE, HP search, fine-tuned):
   VAECox wins: 7/10 cancers
   See paper Table 1 for exact C-index values per cancer and baseline.
 
-Directional consistency: VAECox has the highest mean C-index in our
-  evaluation (0.572), matching the paper's finding of VAECox superiority.
+Verdict: NOT REPRODUCED on toy data. VAECox mean C-index is 0.572, second
+  to CoxMLP at 0.587, and it wins 4/10 rather than 7/10 cancers. With 30
+  patients and as few as 3 events per cancer, the C-index is dominated by
+  split noise (BRCA alone swings between 0.00 and 1.00 across models), so
+  these numbers verify the pipeline rather than test the paper's claim.
+  The real-TCGA run in VAECox_reproduction.ipynb is the actual test.
 
 --------------------------------------------------------------------------------
 TRAINING TIME (approximate, CPU, Apple M-series)

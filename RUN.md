@@ -43,6 +43,8 @@ What the notebook now produces, beyond what it did before:
 | §6j.3 | `km_summary.csv`, `km_all_cohorts.png` | "Kaplan-Meier curves by predicted risk group" |
 | §6j.4 | `paper_comparison.csv` | direct comparison against the paper's Table 1 |
 | §6k | `manuscript_numbers.json` + 5 extension figures | feeds Phase 4 |
+| §7 | `ph2_cindex_per_cancer.png` (with seed error bars), `ph2_cindex_heatmap.png`, `ph2_wins.png`, `ph2_vs_paper.png` | visuals for the headline result |
+| §9 | `vaecox_results.zip` | one small download containing everything above |
 
 ## Step 2 — Transcribe the paper's Table 1
 
@@ -60,14 +62,16 @@ re-run §6j.4 locally later.
 
 ## Step 3 — Pull the results back
 
-Kaggle → notebook Output → **Download all**, then unpack so the repo has:
+The last cell (§9) writes `vaecox_results.zip` containing **only** the CSVs,
+figures, card and `manuscript_numbers.json` — a few MB. Do not use "Download
+all": `/kaggle/working` also holds the ~680 MB VAE checkpoint, which is
+gitignored and only useful for resuming a Kaggle run.
 
-```
-out/
-  results/*.csv
-  results/manuscript_numbers.json
-  results/reproducibility_card.txt
-  figures/*.png
+§9 also verifies every expected output exists and prints `!! EXPECTED OUTPUT
+MISSING` for anything absent, so a section that failed silently can't slip past.
+
+```bash
+unzip vaecox_results.zip -d out/     # → out/results/*.csv, out/figures/*.png
 ```
 
 ## Step 4 — Build the paper

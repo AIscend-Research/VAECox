@@ -25,7 +25,6 @@ attribution.
 VAECox_reproduction.ipynb   the study — runs end to end on Kaggle (GPU)
 RUN.md                      how to run it, step by step
 REPRODUCIBILITY.md          reproducibility checklist (data, seeds, deviations)
-paper/                      manuscript + build_manuscript.py (injects the numbers)
 scripts/                    toy-data pipeline + the upstream fork (see its README)
 data/                       toy expression pickles, 30 patients x 20 cancers
 results/                    toy-data output (superseded by the real run)
@@ -36,7 +35,7 @@ docs/                       figures used by these documents
 
 | | Data | Purpose |
 |---|---|---|
-| **`VAECox_reproduction.ipynb`** | Real TCGA, open-access UCSC Xena mirror | **The study.** Phases 2–4 |
+| **`VAECox_reproduction.ipynb`** | Real TCGA, open-access UCSC Xena mirror | **The study.** Phases 2–3 |
 | `scripts/` | Toy data, 30 patients/cancer | Pipeline verification only |
 
 The toy track cannot test the paper's claim — several cohorts have as few as 3
@@ -49,8 +48,7 @@ reproduction result comes from the notebook.
 ```bash
 # 1. Kaggle: attach the GenoTEX dataset, GPU T4 x2, Save & Run All  (~3.5-5 h)
 # 2. Download vaecox_results.zip from the notebook output
-unzip vaecox_results.zip -d out/
-python paper/build_manuscript.py        # → paper/manuscript_filled.md
+unzip vaecox_results.zip -d out/        # → out/results/*.csv, out/figures/*.png
 ```
 
 Full instructions, including how to split the run across sessions if you are

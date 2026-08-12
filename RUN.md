@@ -69,26 +69,11 @@ What the notebook now produces, beyond what it did before:
 | §6j.1 | `permutation_importance.csv` | "SHAP-style analysis to identify genes contributing most" |
 | §6j.2 | `robustness_by_cancer.csv` | robustness on all 10 cancers, not just one |
 | §6j.3 | `km_summary.csv`, `km_all_cohorts.png` | "Kaplan-Meier curves by predicted risk group" |
-| §6j.4 | `paper_comparison.csv` | direct comparison against the paper's Table 1 |
-| §6k | `manuscript_numbers.json` + 5 extension figures | feeds Phase 4 |
-| §7 | `ph2_cindex_per_cancer.png` (with seed error bars), `ph2_cindex_heatmap.png`, `ph2_wins.png`, `ph2_vs_paper.png` | visuals for the headline result |
+| §6k | `manuscript_numbers.json` + 5 extension figures | all results consolidated into one file |
+| §7 | `ph2_cindex_per_cancer.png` (with seed error bars), `ph2_cindex_heatmap.png`, `ph2_wins.png` | visuals for the headline result |
 | §9 | `vaecox_results.zip` | one small download containing everything above |
 
-## Step 2 — Transcribe the paper's Table 1
-
-Open the paper and fill the `paper_cindex` column of
-[paper/paper_table1.csv](paper/paper_table1.csv). The rows are already laid out
-with matching cancer/model names; partial fills are fine.
-
-The paper's numbers are deliberately **not** hard-coded anywhere in this repo —
-nothing attributed to the original authors should be a guess. Without this file
-§6j.4 skips and §3.3 of the manuscript stays visibly empty.
-
-Attach the filled CSV as a Kaggle dataset (or upload it to `/kaggle/working`)
-before the run if you want the comparison inside the same session; otherwise
-re-run §6j.4 locally later.
-
-## Step 3 — Pull the results back
+## Step 2 — Pull the results back
 
 The last cell (§9) writes `vaecox_results.zip` containing **only** the CSVs,
 figures, card and `manuscript_numbers.json` — a few MB. Do not use "Download
@@ -102,19 +87,7 @@ MISSING` for anything absent, so a section that failed silently can't slip past.
 unzip vaecox_results.zip -d out/     # → out/results/*.csv, out/figures/*.png
 ```
 
-## Step 4 — Build the paper
-
-```bash
-python paper/build_manuscript.py           # reads out/results/, writes paper/manuscript_filled.md
-```
-
-Every table and headline number in the manuscript is injected from the run — no
-number is retyped. Write prose in [paper/manuscript.md](paper/manuscript.md)
-(the `_[bracketed italic]_` notes say what to write in each section), then re-run
-the build. If a placeholder has no data it appears as
-`{{NAME — NOT AVAILABLE}}` rather than silently vanishing.
-
-## Step 5 — Regenerate the toy-data checklist (optional)
+## Step 3 — Regenerate the toy-data checklist (optional)
 
 Only if you re-run the local scripts:
 

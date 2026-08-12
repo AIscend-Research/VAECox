@@ -4,23 +4,25 @@ __pycache__/
 *.pyo
 .venv/
 
-# Large generated data files (rebuild with create_toy_vae_dataset.py)
+# ---- Real-TCGA run (the actual study) --------------------------------------
+# Unpack vaecox_results.zip from the Kaggle run here; results are reproducible
+# from the notebook, so they are not committed.
+out/
+*.zip
+
+# ---- Toy-data pipeline intermediates ---------------------------------------
+# All rebuildable — see scripts/README.md for the command that regenerates each.
 data/toyforVAE_811_mRNA@.tsv
 data/toyforVAE_mRNA@_binary.csv
-data/*.pickle
-
-# Prepared splits (rebuild with phase1_data_prep.py)
 data/prepared/
+data/embeddings/
 
-# Trained model checkpoints and logs (too large for git)
+# Trained checkpoints and logs (too large for git)
 results/vae/
 results/saved_model/
 results/test_ci_dae.tsv
 results/logs/
 results/00000000/
-
-# Keep phase2 CSV results
-!results/phase2/
 
 # Jupyter / IDE
 .ipynb_checkpoints/

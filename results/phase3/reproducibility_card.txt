@@ -184,19 +184,19 @@ Paper (GPU, 500 epochs): training time not reported in paper.
 FILES GENERATED
 --------------------------------------------------------------------------------
 
-  create_toy_vae_dataset.py    — builds toyforVAE_811_mRNA@.tsv from pickles
-  phase1_data_prep.py          — z-normalization, stratified splits, CV indices
-  phase2_reproduction.py       — trains all models, evaluates C-index
+  scripts/create_toy_vae_dataset.py    — builds toyforVAE_811_mRNA@.tsv from pickles
+  scripts/phase1_data_prep.py          — z-normalization, stratified splits, CV indices
+  scripts/phase2_reproduction.py       — trains all models, evaluates C-index
   results/phase2/cindex_comparison.csv — numeric results table
   data/embeddings/<CANCER>/seed_<N>/{Z_train,Z_test}.npy — VAE embeddings
   data/prepared/<CANCER>/seed_<N>/*.npy — prepared splits (not committed, 241MB)
   results/vae/vae_pretrained/final_model — pretrained VAE (not committed, 678MB)
 
 To fully reproduce from scratch:
-  1. python create_toy_vae_dataset.py
-  2. python phase1_data_prep.py
-  3. python vae_run.py              # trains VAE (~2 min CPU)
-  4. python phase2_reproduction.py  # evaluates all models (~8 min CPU)
-  5. python phase3_extensions.py    # extensions and analysis (~20 min CPU)
+  1. python scripts/create_toy_vae_dataset.py
+  2. python scripts/phase1_data_prep.py
+  3. python scripts/vae_run.py              # trains VAE (~2 min CPU)
+  4. python scripts/phase2_reproduction.py  # evaluates all models (~8 min CPU)
+  5. python scripts/phase3_extensions.py    # extensions and analysis (~20 min CPU)
 
 ================================================================================

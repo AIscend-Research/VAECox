@@ -8,7 +8,7 @@ Two tracks exist in this repo and they are **not** interchangeable:
 
 | Track | Data | Purpose | Status |
 |---|---|---|---|
-| Local scripts (`phase1_…`, `phase2_…`, `phase3_…`) | Toy data, 30 patients/cancer | Verify the pipeline executes | Done — results in `results/` |
+| [`scripts/`](scripts/) (toy pipeline + upstream fork) | Toy data, 30 patients/cancer | Verify the pipeline executes | Done — results in `results/` |
 | `VAECox_reproduction.ipynb` | Real TCGA (open-access Xena mirror) | **The actual reproduction + extensions** | Not yet run |
 
 Toy-data C-indices cannot test the paper's claim (as few as 3 uncensored events
@@ -119,7 +119,7 @@ the build. If a placeholder has no data it appears as
 Only if you re-run the local scripts:
 
 ```bash
-python phase3_additional.py    # rewrites REPRODUCIBILITY.md, section 9 computed from the CSV
+python scripts/phase3_additional.py    # rewrites REPRODUCIBILITY.md, section 9 computed from the CSV
 ```
 
 ---

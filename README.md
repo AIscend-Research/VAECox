@@ -1,41 +1,72 @@
-## Introduction
+# Reproducing VAECox
 
-![model image](fig1.png)
+A reproducibility study of **"Improved survival analysis by learning shared
+genomic information from pan-cancer data"** (Kim, Kim, Choe, Lee & Kang,
+*Bioinformatics* 36(Suppl_1):i389–i398, 2020),
+[doi:10.1093/bioinformatics/btaa462](https://doi.org/10.1093/bioinformatics/btaa462) ·
+original code: [dmis-lab/VAECox](https://github.com/dmis-lab/VAECox).
 
-Recent advances in deep learning have offered solutions to many biomedical tasks. However, there remains a challenge in applying deep learning to survival analysis using human cancer transcriptome data. Since the number of genes, the input variables of survival model, is larger than the amount of available cancer patient samples, deep learning models are prone to overfitting. To address the issue, we introduce a new deep learning architecture called VAECox. VAECox employs transfer learning and fine tuning.
+![VAECox architecture](docs/fig1.png)
 
-We pre-trained a variational autoencoder on all RNA-seq data in 20 TCGA datasets and transferred the trained weights to our survival prediction model. Then we fine-tuned the transferred weights during training the survival model on each dataset. Results show that our model outperformed other previous models such as Cox-PH with LASSO and ridge penalty and Cox-nnet on the 7 of 10 TCGA datasets in terms of C-index. The results signify that the transferred information obtained from entire cancer transcriptome data helped our survival prediction model reduce overfitting and show robust performance in unseen cancer patient samples.
+VAECox pretrains a variational autoencoder on pan-cancer RNA-seq, transfers the
+encoder into a Cox proportional-hazards network, and fine-tunes it per cancer
+type. The paper reports that this beats CoxLasso, CoxRidge and Cox-nnet on
+**7 of 10** TCGA cancers by concordance index.
 
-## Demo
+We retrain the whole pipeline on real TCGA data, test that claim, and extend the
+study toward **responsible, low-resource medical AI**: robustness to missing and
+noisy expression values, fairness across cancer cohorts and clinical subgroups,
+lightweight models with an explicit equity check, and permutation-based gene
+attribution.
 
-### Prerequisites
-We provide toy data to run our implementation.
-The full TCGA gene expression data can be downloaded in ICGC data portal.
+## Layout
 
-https://dcc.icgc.org/
-
-### Training Variational Autoencoder
 ```
-python vae_run.py
+VAECox_reproduction.ipynb   the study — runs end to end on Kaggle (GPU)
+RUN.md                      how to run it, step by step
+REPRODUCIBILITY.md          reproducibility checklist (data, seeds, deviations)
+paper/                      manuscript + build_manuscript.py (injects the numbers)
+scripts/                    toy-data pipeline + the upstream fork (see its README)
+data/                       toy expression pickles, 30 patients x 20 cancers
+results/                    toy-data output (superseded by the real run)
+docs/                       figures used by these documents
 ```
 
-### Training and evaluating VAECox
+## Two tracks, and which one counts
+
+| | Data | Purpose |
+|---|---|---|
+| **`VAECox_reproduction.ipynb`** | Real TCGA, open-access UCSC Xena mirror | **The study.** Phases 2–4 |
+| `scripts/` | Toy data, 30 patients/cancer | Pipeline verification only |
+
+The toy track cannot test the paper's claim — several cohorts have as few as 3
+uncensored events, so the C-index there is dominated by split noise. Its numbers
+are in `results/` and clearly labelled as such. Everything reported as a
+reproduction result comes from the notebook.
+
+## Quick start
+
+```bash
+# 1. Kaggle: attach the GenoTEX dataset, GPU T4 x2, Save & Run All  (~3.5-5 h)
+# 2. Download vaecox_results.zip from the notebook output
+unzip vaecox_results.zip -d out/
+python paper/build_manuscript.py        # → paper/manuscript_filled.md
 ```
-python main.py
+
+Full instructions, including how to split the run across sessions if you are
+short on GPU quota, are in [RUN.md](RUN.md).
+
+## Requirements
+
+```bash
+pip install numpy pandas scipy scikit-learn matplotlib seaborn lifelines torch tqdm
 ```
 
-## Authors
-
-* Sunkyu Kim
-* Keonwoo Kim 
-* Junseok Choe
-* Inggeol Lee 
-* Jaewoo Kang - kangj@korea.ac.kr
-
-## Publication
-
-My paper 'Improved survival analysis by learning shared genomic information from pan-cancer data' has been accepted for presentation at ISMB 2020 and for inclusion in the conference proceedings, which is published online in the journal Bioinformatics.
+The notebook installs `lifelines` itself on Kaggle; everything else is in the
+base image. The toy pipeline runs on CPU.
 
 ## Citation
-Sunkyu Kim, Keonwoo Kim, Junseok Choe, Inggeol Lee, Jaewoo Kang, Improved survival analysis by learning shared genomic information from pan-cancer data, Bioinformatics, Volume 36, Issue Supplement_1, July 2020, Pages i389–i398, https://doi.org/10.1093/bioinformatics/btaa462
 
+Sunkyu Kim, Keonwoo Kim, Junseok Choe, Inggeol Lee, Jaewoo Kang.
+*Improved survival analysis by learning shared genomic information from
+pan-cancer data.* Bioinformatics 36(Supplement_1):i389–i398, July 2020.

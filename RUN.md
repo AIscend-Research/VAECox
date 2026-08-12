@@ -2,6 +2,10 @@
 
 Two tracks exist in this repo and they are **not** interchangeable:
 
+> **Runtime:** ~3.5–5 h on a T4. Every expensive stage caches its CSV, so an
+> interrupted run resumes instead of restarting — see *If you are short on GPU
+> quota* below.
+
 | Track | Data | Purpose | Status |
 |---|---|---|---|
 | Local scripts (`phase1_…`, `phase2_…`, `phase3_…`) | Toy data, 30 patients/cancer | Verify the pipeline executes | Done — results in `results/` |
@@ -29,6 +33,30 @@ notebook run.
 **Want a fast smoke test first?** In §0 set `VAE_EPOCHS=50`, `SEEDS=list(range(3))`,
 `HP_SEARCH=False`. It finishes in well under an hour and exercises every cell. Then
 reset those three values and do the real run.
+
+### If you are short on GPU quota
+
+Kaggle allots 30 GPU-hours/week. The full run is ~3.5–5 h, so if you have less
+than ~6 h left, **split it across two committed runs** — the notebook is
+resumable and will not redo completed work.
+
+**Session A** — Run All, then stop after §5 finishes (or just let it run; if the
+quota kills it later, §5's output is already committed). Produces
+`vae_pretrained.pt` and `results/cindex_long.csv`. Roughly 1.5–2.5 h.
+
+**Session B** — *Add Data → Your Datasets → Notebook Output*, attach Session A's
+output, then Run All. §3 finds the checkpoint and skips VAE pretraining; §5 finds
+`cindex_long.csv` and prints `[resume] … Phase 2 not re-run`. Roughly 2–3 h.
+
+The same mechanism covers every expensive extension —
+`subgroup_cindex`, `lightweight_by_cancer`, `feature_subset`,
+`permutation_importance`, `robustness_by_cancer`, `km_summary` each reload from
+CSV if a previous run produced them. So a third session picks up wherever the
+second stopped. Set `CFG["RESUME"]=False` to force a clean recompute.
+
+**Always use Save Version → Save & Run All (Commit).** An interactive session's
+`/kaggle/working` is lost when the session ends; only a committed run publishes
+its output, and only a published output can be attached to the next session.
 
 What the notebook now produces, beyond what it did before:
 

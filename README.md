@@ -27,7 +27,8 @@ RUN.md                      how to run it, step by step
 REPRODUCIBILITY.md          reproducibility checklist (data, seeds, deviations)
 scripts/                    toy-data pipeline + the upstream fork (see its README)
 data/                       toy expression pickles, 30 patients x 20 cancers
-results/                    toy-data output (superseded by the real run)
+results/tcga/               THE RESULTS — real-TCGA run (29 files, 14 figures)
+results/phase2|phase3/      toy-data output (superseded)
 docs/                       figures used by these documents
 ```
 
@@ -48,7 +49,7 @@ reproduction result comes from the notebook.
 ```bash
 # 1. Kaggle: attach the GenoTEX dataset, GPU T4 x2, Save & Run All  (~3.5-5 h)
 # 2. Download vaecox_results.zip from the notebook output
-unzip vaecox_results.zip -d out/        # → out/results/*.csv, out/figures/*.png
+unzip vaecox_results.zip -d results/tcga/
 ```
 
 Full instructions, including how to split the run across sessions if you are

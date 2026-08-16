@@ -1,0 +1,5 @@
+cancer,model,variable,group,n_seeds,mean_n,mean_cindex,std_cindex
+BRCA,CoxRidge,subtype,"Other, specify",2,11,0.2753,0.0025
+BRCA,CoxRidge,subtype,Mixed Histology (please specify),1,10,0.75,0.0
+BRCA,VAECox,subtype,"Other, specify",2,11,0.7803,0.053
+BRCA,VAECox,subtype,Mixed Histology (please specify),1,10,0.875,0.0

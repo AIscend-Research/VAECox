@@ -1,0 +1,64 @@
+
+================================================================================
+REPRODUCIBILITY CARD — VAECox (Bioinformatics 2020, Suppl. 1)
+================================================================================
+Paper : Kim, Kim, Choe, Lee, Kang. "Improved survival analysis by learning
+        shared genomic information from pan-cancer data."
+        Bioinformatics 36(Suppl_1):i389-i398. DOI:10.1093/bioinformatics/btaa462
+Claim : VAECox outperforms CoxLasso/CoxRidge/Coxnnet on 7/10 TCGA cancers (C-index).
+
+DATA SOURCE     : REAL TCGA via GenoTEX (UCSC Xena TCGA Hub, HiSeqV2_PANCAN)
+Cohorts         : ['ACC', 'BLCA', 'BRCA', 'CESC', 'CHOL', 'COAD', 'COADREAD', 'DLBC', 'ESCA', 'GBM', 'GBMLGG', 'HNSC', 'KICH', 'KIRC', 'KIRP', 'LGG', 'LIHC', 'LUAD', 'LUNG', 'LUSC', 'MESO', 'OV', 'PAAD', 'PCPG', 'PRAD', 'READ', 'SARC', 'SKCM', 'STAD', 'TGCT', 'THCA', 'THYM', 'UCEC', 'UCS', 'UVM']
+Genes (VAE dim) : 20530
+Device          : cuda (Tesla T4)
+Seeds           : [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+VAE             : 20530->4096->128 (mu,sigma), Tanh, Adam
+                  lr=0.001 wd=1e-05 epochs=500 batch=256
+VAECox          : pretrained encoder FINE-TUNED + Coxnnet(128)  [paper's method]
+HP search       : reduced grid [(0.001, 1e-05), (0.001, 0.001), (0.0001, 1e-05)] per cancer
+Surv epochs     : 100
+
+--------------------------------------------------------------------------------
+PHASE 2 — REPRODUCTION
+--------------------------------------------------------------------------------
+Wins (this run) : VAECox 5, Coxnnet 3, CoxLasso 1, CoxMLP 1, CoxRidge 0
+Paper wins      : VAECox 7/10
+Mean C-index    : CoxLasso 0.643, CoxMLP 0.641, CoxRidge 0.638, Coxnnet 0.646, VAECox 0.648
+Best mean       : VAECox
+
+--------------------------------------------------------------------------------
+PHASE 3 — EXTENSIONS
+--------------------------------------------------------------------------------
+Subgroup fairness   : largest gap 0.242 C-index (STAD/age_group, CoxRidge:
+                      >65 vs <=50); mean gap across strata 0.065. Age is the
+                      dominant axis (mean gap 0.099-0.100), then subtype
+                      (0.063-0.068), sex (0.053-0.055), stage (0.026-0.036).
+Lightweight equity  : shrinking the VAE changes C-index by -0.003 on low-event cohorts vs +0.005 on high-event cohorts
+Robustness          : missing=50%: CoxRidge 0.604 (from 0.632), VAECox 0.630 (from 0.631); noise=sigma=2.0: CoxRidge 0.589 (from 0.632), VAECox 0.628 (from 0.631)
+Risk stratification : 5/10 cohorts show significant high/low risk separation (log-rank p<0.05)
+CPU accessibility   : k=1000 genes, 1.08M-param VAE trains on CPU in 11.4s; C-index 0.626
+Interpretability    : permutation importance over 3 cohorts
+                      x 2 models
+
+--------------------------------------------------------------------------------
+DEVIATIONS
+--------------------------------------------------------------------------------
+  - HP search reduced vs paper's 18-combo 5-fold CV (time). Documented.
+  - Extensions use fixed HP ({'CoxLasso': (0.0001, 0.0), 'CoxRidge': (0.0001, 0.001), 'Coxnnet': (0.001, 1e-05), 'CoxMLP': (0.001, 1e-05), 'VAECox': (0.001, 1e-05)}) rather than the per-cancer search,
+    so extension C-indices are not directly comparable to the Phase 2 table.
+  - VAE minibatched on GPU (paper full-batch); numerically equivalent.
+  - Lightweight sweep pretrains every config for 100 epochs (not
+    500) so configs are compared at an equal compute budget.
+  - Robustness (6j.2) uses 5 seeds; subgroup fairness (6h) uses all 10.
+  - Subgroup gaps exclude TCGA free-text histology placeholders ("Other,
+    specify" / "Mixed Histology (please specify)"): 4 strata dropped, listed in
+    subgroup_excluded_strata.csv. They are not clinical categories, so a gap
+    between two of them measures nothing. Recomputing without them moves the
+    largest gap from 0.475 to 0.242 and the subtype mean from 0.173 to 0.063
+    (CoxRidge) / 0.116 to 0.068 (VAECox).
+  - GenoTEX HiSeqV2_PANCAN gene set (20530) may differ slightly from
+    paper's 20,502 (pan-cancer-normalised vs per-cohort). Documented.
+  - Subgroup strata below 10 patients or 3 events are dropped as
+    unestimable rather than reported.
+================================================================================

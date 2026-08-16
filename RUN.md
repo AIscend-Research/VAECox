@@ -8,8 +8,8 @@ Two tracks exist in this repo and they are **not** interchangeable:
 
 | Track | Data | Purpose | Status |
 |---|---|---|---|
-| [`scripts/`](scripts/) (toy pipeline + upstream fork) | Toy data, 30 patients/cancer | Verify the pipeline executes | Done — results in `results/` |
-| `VAECox_reproduction.ipynb` | Real TCGA (open-access Xena mirror) | **The actual reproduction + extensions** | Not yet run |
+| [`scripts/`](scripts/) (toy pipeline + upstream fork) | Toy data, 30 patients/cancer | Verify the pipeline executes | Superseded — `results/phase2|3/` |
+| `VAECox_reproduction.ipynb` | Real TCGA (open-access Xena mirror) | **The actual reproduction + extensions** | Done — results in `results/tcga/` |
 
 Toy-data C-indices cannot test the paper's claim (as few as 3 uncensored events
 per cancer). Everything the report says about reproduction has to come from the
@@ -22,7 +22,7 @@ notebook run.
 1. Upload `VAECox_reproduction.ipynb` to Kaggle.
 2. **Add data** → search *GenoTEX: LLM Agent Benchmark for Genomic Analysis*
    (uploader `haoyangliu14`) → attach it.
-3. **Settings** → Accelerator → **GPU T4 x2** (or P100). Internet can stay Off.
+3. **Settings** → Accelerator → **GPU T4 x2** (or P100). Internet **on** (§0 pip-installs lifelines).
 4. **Run all.** Expect several hours; §5 (Phase 2) and §6i (lightweight sweep)
    dominate. Everything is checkpointed to `/kaggle/working`, so if the 12-hour
    session limit hits, re-running resumes from the cached VAE.
@@ -58,7 +58,7 @@ second stopped. Set `CFG["RESUME"]=False` to force a clean recompute.
 `/kaggle/working` is lost when the session ends; only a committed run publishes
 its output, and only a published output can be attached to the next session.
 
-What the notebook now produces, beyond what it did before:
+What the notebook produces:
 
 | Section | Output | Roadmap item it covers |
 |---|---|---|
@@ -84,7 +84,7 @@ gitignored and only useful for resuming a Kaggle run.
 MISSING` for anything absent, so a section that failed silently can't slip past.
 
 ```bash
-unzip vaecox_results.zip -d out/     # → out/results/*.csv, out/figures/*.png
+unzip vaecox_results.zip -d results/tcga/   # → results/tcga/*.csv + figures/
 ```
 
 ## Step 3 — Regenerate the toy-data checklist (optional)

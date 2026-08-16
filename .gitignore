@@ -4,11 +4,11 @@ __pycache__/
 *.pyo
 .venv/
 
-# ---- Real-TCGA run (the actual study) --------------------------------------
-# Unpack vaecox_results.zip from the Kaggle run here; results are reproducible
-# from the notebook, so they are not committed.
-out/
+# ---- Real-TCGA run ---------------------------------------------------------
+# results/tcga/ IS committed — it is the study's output. Only the raw download
+# and the 680 MB VAE checkpoint are excluded.
 *.zip
+*.pt
 
 # ---- Toy-data pipeline intermediates ---------------------------------------
 # All rebuildable — see scripts/README.md for the command that regenerates each.

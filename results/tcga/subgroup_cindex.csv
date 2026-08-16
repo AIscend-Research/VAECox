@@ -1,0 +1,163 @@
+cancer,model,variable,group,n_seeds,mean_n,mean_cindex,std_cindex
+BLCA,CoxRidge,age_group,>65,10,49,0.6012,0.0493
+BLCA,CoxRidge,age_group,51-65,10,25,0.5592,0.0918
+BLCA,CoxRidge,sex,MALE,10,59,0.582,0.0422
+BLCA,CoxRidge,sex,FEMALE,10,22,0.6692,0.1347
+BLCA,CoxRidge,stage,Late (III-IV),10,55,0.6067,0.0464
+BLCA,CoxRidge,stage,Early (I-II),9,25,0.5602,0.1057
+BLCA,CoxRidge,subtype,Muscle invasive urothelial carcinoma (pT2 or above),10,80,0.6079,0.0431
+BLCA,VAECox,age_group,>65,10,49,0.6,0.0521
+BLCA,VAECox,age_group,51-65,10,25,0.6146,0.0673
+BLCA,VAECox,sex,MALE,10,59,0.599,0.0505
+BLCA,VAECox,sex,FEMALE,10,22,0.6494,0.1137
+BLCA,VAECox,stage,Late (III-IV),10,55,0.6176,0.0352
+BLCA,VAECox,stage,Early (I-II),9,25,0.5527,0.0766
+BLCA,VAECox,subtype,Muscle invasive urothelial carcinoma (pT2 or above),10,80,0.6174,0.0455
+BRCA,CoxRidge,age_group,51-65,10,87,0.6647,0.1317
+BRCA,CoxRidge,age_group,<=50,10,64,0.7378,0.085
+BRCA,CoxRidge,age_group,>65,10,63,0.6196,0.0925
+BRCA,CoxRidge,sex,FEMALE,10,213,0.6775,0.0668
+BRCA,CoxRidge,stage,Early (I-II),10,162,0.6511,0.0778
+BRCA,CoxRidge,stage,Late (III-IV),10,49,0.6438,0.1647
+BRCA,CoxRidge,subtype,Infiltrating Ductal Carcinoma,10,156,0.6988,0.0688
+BRCA,CoxRidge,subtype,Infiltrating Lobular Carcinoma,8,38,0.663,0.142
+BRCA,CoxRidge,subtype,"Other, specify",2,11,0.2753,0.0025
+BRCA,CoxRidge,subtype,Mixed Histology (please specify),1,10,0.75,0.0
+BRCA,VAECox,age_group,51-65,10,87,0.6495,0.0975
+BRCA,VAECox,age_group,<=50,10,64,0.759,0.0718
+BRCA,VAECox,age_group,>65,10,63,0.6325,0.083
+BRCA,VAECox,sex,FEMALE,10,213,0.6819,0.0378
+BRCA,VAECox,stage,Early (I-II),10,162,0.6413,0.0639
+BRCA,VAECox,stage,Late (III-IV),10,49,0.6871,0.0694
+BRCA,VAECox,subtype,Infiltrating Ductal Carcinoma,10,156,0.6822,0.0472
+BRCA,VAECox,subtype,Infiltrating Lobular Carcinoma,8,38,0.6583,0.1206
+BRCA,VAECox,subtype,"Other, specify",2,11,0.7803,0.053
+BRCA,VAECox,subtype,Mixed Histology (please specify),1,10,0.875,0.0
+HNSC,CoxRidge,age_group,<=50,10,18,0.6542,0.1184
+HNSC,CoxRidge,age_group,>65,10,37,0.6084,0.0719
+HNSC,CoxRidge,age_group,51-65,10,48,0.6327,0.0631
+HNSC,CoxRidge,sex,MALE,10,76,0.6321,0.0267
+HNSC,CoxRidge,sex,FEMALE,10,27,0.5523,0.0884
+HNSC,CoxRidge,stage,Late (III-IV),10,71,0.6291,0.0333
+HNSC,CoxRidge,stage,Early (I-II),10,18,0.5982,0.1105
+HNSC,CoxRidge,subtype,Head & Neck Squamous Cell Carcinoma,10,101,0.62,0.014
+HNSC,VAECox,age_group,<=50,10,18,0.6344,0.1777
+HNSC,VAECox,age_group,>65,10,37,0.5899,0.0723
+HNSC,VAECox,age_group,51-65,10,48,0.571,0.0557
+HNSC,VAECox,sex,MALE,10,76,0.6122,0.05
+HNSC,VAECox,sex,FEMALE,10,27,0.4789,0.1091
+HNSC,VAECox,stage,Late (III-IV),10,71,0.5799,0.0543
+HNSC,VAECox,stage,Early (I-II),10,18,0.5993,0.1147
+HNSC,VAECox,subtype,Head & Neck Squamous Cell Carcinoma,10,101,0.5853,0.0393
+KIRC,CoxRidge,age_group,51-65,10,47,0.7091,0.0559
+KIRC,CoxRidge,age_group,>65,10,36,0.6394,0.0755
+KIRC,CoxRidge,age_group,<=50,8,23,0.8098,0.0859
+KIRC,CoxRidge,sex,MALE,10,68,0.71,0.0495
+KIRC,CoxRidge,sex,FEMALE,10,38,0.692,0.1037
+KIRC,CoxRidge,stage,Early (I-II),10,66,0.5681,0.1015
+KIRC,CoxRidge,stage,Late (III-IV),10,39,0.6635,0.052
+KIRC,CoxRidge,subtype,Kidney Clear Cell Renal Carcinoma,10,107,0.7026,0.0469
+KIRC,VAECox,age_group,51-65,10,47,0.7217,0.0381
+KIRC,VAECox,age_group,>65,10,36,0.676,0.0661
+KIRC,VAECox,age_group,<=50,8,23,0.8581,0.0743
+KIRC,VAECox,sex,MALE,10,68,0.7355,0.0299
+KIRC,VAECox,sex,FEMALE,10,38,0.7208,0.0774
+KIRC,VAECox,stage,Early (I-II),10,66,0.6492,0.0527
+KIRC,VAECox,stage,Late (III-IV),10,39,0.6982,0.0394
+KIRC,VAECox,subtype,Kidney Clear Cell Renal Carcinoma,10,107,0.7273,0.0289
+LGG,CoxRidge,age_group,51-65,10,24,0.764,0.0734
+LGG,CoxRidge,age_group,<=50,10,72,0.814,0.0557
+LGG,CoxRidge,sex,FEMALE,10,45,0.7647,0.0896
+LGG,CoxRidge,sex,MALE,10,57,0.8579,0.0504
+LGG,CoxRidge,subtype,Astrocytoma,10,40,0.8395,0.0713
+LGG,CoxRidge,subtype,Oligodendroglioma,10,35,0.7754,0.1011
+LGG,CoxRidge,subtype,Oligoastrocytoma,10,26,0.7529,0.1788
+LGG,VAECox,age_group,51-65,10,24,0.7538,0.0927
+LGG,VAECox,age_group,<=50,10,72,0.8117,0.0247
+LGG,VAECox,sex,FEMALE,10,45,0.7637,0.0838
+LGG,VAECox,sex,MALE,10,57,0.8244,0.0304
+LGG,VAECox,subtype,Astrocytoma,10,40,0.8037,0.0573
+LGG,VAECox,subtype,Oligodendroglioma,10,35,0.7845,0.0773
+LGG,VAECox,subtype,Oligoastrocytoma,10,26,0.7607,0.142
+LIHC,CoxRidge,age_group,<=50,8,15,0.6836,0.0773
+LIHC,CoxRidge,age_group,51-65,10,32,0.674,0.1019
+LIHC,CoxRidge,age_group,>65,10,26,0.7104,0.075
+LIHC,CoxRidge,sex,FEMALE,10,24,0.6269,0.0905
+LIHC,CoxRidge,sex,MALE,10,49,0.7188,0.0649
+LIHC,CoxRidge,stage,Early (I-II),10,52,0.6648,0.0653
+LIHC,CoxRidge,stage,Late (III-IV),10,16,0.6765,0.0465
+LIHC,CoxRidge,subtype,Hepatocellular Carcinoma,10,70,0.698,0.0519
+LIHC,VAECox,age_group,<=50,8,15,0.7377,0.0796
+LIHC,VAECox,age_group,51-65,10,32,0.6965,0.0973
+LIHC,VAECox,age_group,>65,10,26,0.7156,0.0839
+LIHC,VAECox,sex,FEMALE,10,24,0.6713,0.1108
+LIHC,VAECox,sex,MALE,10,49,0.7477,0.0543
+LIHC,VAECox,stage,Early (I-II),10,52,0.6962,0.042
+LIHC,VAECox,stage,Late (III-IV),10,16,0.6882,0.0895
+LIHC,VAECox,subtype,Hepatocellular Carcinoma,10,70,0.7168,0.0385
+LUAD,CoxRidge,age_group,51-65,10,38,0.6153,0.0693
+LUAD,CoxRidge,age_group,>65,10,52,0.604,0.0574
+LUAD,CoxRidge,age_group,<=50,3,11,0.4962,0.1101
+LUAD,CoxRidge,sex,MALE,10,47,0.6024,0.0867
+LUAD,CoxRidge,sex,FEMALE,10,53,0.5976,0.0618
+LUAD,CoxRidge,stage,Early (I-II),10,76,0.5812,0.0754
+LUAD,CoxRidge,stage,Late (III-IV),10,23,0.6092,0.0724
+LUAD,CoxRidge,subtype,Lung Adenocarcinoma- Not Otherwise Specified (NOS),10,63,0.6123,0.0255
+LUAD,CoxRidge,subtype,Lung Adenocarcinoma Mixed Subtype,10,20,0.6409,0.1542
+LUAD,VAECox,age_group,51-65,10,38,0.6299,0.0433
+LUAD,VAECox,age_group,>65,10,52,0.6259,0.0524
+LUAD,VAECox,age_group,<=50,3,11,0.4534,0.0636
+LUAD,VAECox,sex,MALE,10,47,0.6061,0.076
+LUAD,VAECox,sex,FEMALE,10,53,0.6218,0.0588
+LUAD,VAECox,stage,Early (I-II),10,76,0.6068,0.0606
+LUAD,VAECox,stage,Late (III-IV),10,23,0.6111,0.0541
+LUAD,VAECox,subtype,Lung Adenocarcinoma- Not Otherwise Specified (NOS),10,63,0.6148,0.0287
+LUAD,VAECox,subtype,Lung Adenocarcinoma Mixed Subtype,10,20,0.6653,0.1077
+LUSC,CoxRidge,age_group,>65,10,59,0.514,0.0539
+LUSC,CoxRidge,age_group,51-65,10,34,0.4753,0.1041
+LUSC,CoxRidge,sex,MALE,10,74,0.5068,0.0577
+LUSC,CoxRidge,sex,FEMALE,10,24,0.4873,0.0605
+LUSC,CoxRidge,stage,Early (I-II),10,78,0.5071,0.0535
+LUSC,CoxRidge,stage,Late (III-IV),10,20,0.5087,0.0583
+LUSC,CoxRidge,subtype,Lung Squamous Cell Carcinoma- Not Otherwise Specified (NOS),10,95,0.5012,0.0429
+LUSC,VAECox,age_group,>65,10,59,0.4889,0.0239
+LUSC,VAECox,age_group,51-65,10,34,0.5084,0.1011
+LUSC,VAECox,sex,MALE,10,74,0.4774,0.0273
+LUSC,VAECox,sex,FEMALE,10,24,0.5076,0.0637
+LUSC,VAECox,stage,Early (I-II),10,78,0.4882,0.0363
+LUSC,VAECox,stage,Late (III-IV),10,20,0.4959,0.0674
+LUSC,VAECox,subtype,Lung Squamous Cell Carcinoma- Not Otherwise Specified (NOS),10,95,0.4891,0.0195
+OV,CoxRidge,age_group,51-65,10,27,0.5269,0.098
+OV,CoxRidge,age_group,>65,10,18,0.5711,0.0643
+OV,CoxRidge,age_group,<=50,10,15,0.6639,0.1053
+OV,CoxRidge,sex,FEMALE,10,61,0.5803,0.0354
+OV,CoxRidge,stage,Late (III-IV),10,56,0.5727,0.0453
+OV,CoxRidge,subtype,Serous Cystadenocarcinoma,10,61,0.5803,0.0354
+OV,VAECox,age_group,51-65,10,27,0.5149,0.0908
+OV,VAECox,age_group,>65,10,18,0.6148,0.0942
+OV,VAECox,age_group,<=50,10,15,0.7061,0.1427
+OV,VAECox,sex,FEMALE,10,61,0.5948,0.0473
+OV,VAECox,stage,Late (III-IV),10,56,0.589,0.0555
+OV,VAECox,subtype,Serous Cystadenocarcinoma,10,61,0.5948,0.0473
+STAD,CoxRidge,age_group,51-65,10,30,0.4454,0.0993
+STAD,CoxRidge,age_group,>65,10,41,0.5578,0.0485
+STAD,CoxRidge,sex,MALE,10,51,0.5015,0.0685
+STAD,CoxRidge,sex,FEMALE,10,27,0.5465,0.0994
+STAD,CoxRidge,stage,Late (III-IV),10,40,0.4856,0.0678
+STAD,CoxRidge,stage,Early (I-II),10,34,0.5556,0.1003
+STAD,CoxRidge,subtype,"Stomach, Intestinal Adenocarcinoma, Tubular Type",9,16,0.4596,0.144
+STAD,CoxRidge,subtype,"Stomach, Adenocarcinoma, Not Otherwise Specified (NOS)",10,26,0.5074,0.0837
+STAD,CoxRidge,subtype,"Stomach, Intestinal Adenocarcinoma, Not Otherwise Specified (NOS)",9,13,0.5289,0.1679
+STAD,CoxRidge,subtype,"Stomach, Adenocarcinoma, Diffuse Type",10,15,0.5617,0.1016
+STAD,CoxRidge,age_group,<=50,1,11,0.3158,0.0
+STAD,VAECox,age_group,51-65,10,30,0.4638,0.109
+STAD,VAECox,age_group,>65,10,41,0.5267,0.0981
+STAD,VAECox,sex,MALE,10,51,0.5002,0.0889
+STAD,VAECox,sex,FEMALE,10,27,0.5407,0.1434
+STAD,VAECox,stage,Late (III-IV),10,40,0.5113,0.0779
+STAD,VAECox,stage,Early (I-II),10,34,0.5215,0.191
+STAD,VAECox,subtype,"Stomach, Intestinal Adenocarcinoma, Tubular Type",9,16,0.4789,0.1073
+STAD,VAECox,subtype,"Stomach, Adenocarcinoma, Not Otherwise Specified (NOS)",10,26,0.4741,0.1157
+STAD,VAECox,subtype,"Stomach, Intestinal Adenocarcinoma, Not Otherwise Specified (NOS)",9,13,0.4845,0.1358
+STAD,VAECox,subtype,"Stomach, Adenocarcinoma, Diffuse Type",10,15,0.6282,0.1441
+STAD,VAECox,age_group,<=50,1,11,0.5789,0.0

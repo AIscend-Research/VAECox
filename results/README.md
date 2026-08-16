@@ -1,22 +1,31 @@
-# Toy-data results
+# Results
 
-Everything in this directory came from [`../scripts/`](../scripts/) running on the
-30-patients-per-cancer toy data. **These are not reproduction results.** Several
-cohorts have as few as 3 uncensored events, so the C-index here measures split
-noise more than model quality — see §9 of [`../REPRODUCIBILITY.md`](../REPRODUCIBILITY.md).
+Two directories, and only one of them is the study.
 
-Real-TCGA results from `VAECox_reproduction.ipynb` land in `../out/` (gitignored;
-unzip `vaecox_results.zip` there). Those are the numbers the manuscript reports.
+## `tcga/` — the reproduction
 
-| | |
+Real TCGA (35 cohorts, 10,993 patients, 20,530 genes) via the open-access UCSC
+Xena mirror, produced by `../VAECox_reproduction.ipynb` on a Tesla T4.
+**These are the numbers to report.** Settings, seeds and deviations:
+[`tcga/reproducibility_card.txt`](tcga/reproducibility_card.txt).
+
+| File | Contents |
 |---|---|
-| `phase2/cindex_comparison.csv` | C-index, 6 models × 10 cancers |
-| `phase3/3a_lightweight_models.csv` | hidden/latent dimension sweep |
-| `phase3/3b_feature_subset.csv` | C-index vs feature count |
-| `phase3/3cd_robustness.csv` | missing / noisy feature robustness |
-| `phase3/3e_fairness_correlation.csv` | event rate vs C-index |
-| `phase3/feature_importance.csv` | top genes per model and cancer |
-| `phase3/km_summary.csv` | log-rank p-values by predicted risk group |
-| `phase3/cancer_stats.csv` | per-cohort N, events, censoring rate |
-| `phase3/reproducibility_card.txt` | full settings and deviations |
-| `phase3/figures/` | the 9 toy-data figures |
+| `cindex_comparison.csv` | headline table — 5 models × 10 cancers + mean |
+| `cindex_long.csv` | same, with per-cancer standard deviations across seeds |
+| `robustness_by_cancer.csv` | C-index under 0–50% missing features and σ 0–2 noise |
+| `subgroup_cindex.csv`, `subgroup_gaps.csv` | within-stratum C-index by age/sex/stage/subtype, and best–worst gaps |
+| `cohort_fairness.csv` | cohort size and event count vs C-index, all 5 models |
+| `lightweight_by_cancer.csv`, `lightweight_disparity.csv` | VAE size sweep, and whether shrinking hurts small cohorts more |
+| `feature_subset.csv` | C-index vs gene budget, including a CPU-only run |
+| `permutation_importance.csv` | top genes by permutation C-index drop |
+| `km_summary.csv` | log-rank p-values for high/low predicted-risk split |
+| `manuscript_numbers.json` | all of the above consolidated |
+| `figures/` | 14 PNGs |
+
+## `phase2/`, `phase3/` — toy-data track
+
+Output of [`../scripts/`](../scripts/) on the 30-patients-per-cancer toy data.
+Pipeline verification only: several cohorts have as few as 3 uncensored events,
+so the C-index there measures split noise. Kept for provenance; superseded by
+`tcga/` in every respect. See §9 of [`../REPRODUCIBILITY.md`](../REPRODUCIBILITY.md).
